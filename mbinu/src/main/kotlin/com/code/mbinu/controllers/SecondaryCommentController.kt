@@ -1,6 +1,7 @@
 package com.code.mbinu.controllers
 
 import com.code.mbinu.models.SecondaryComment
+import com.code.mbinu.models.Status
 import com.code.mbinu.services.SecondaryCommentService
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.Logger
@@ -15,6 +16,12 @@ class SecondaryCommentController( val secondaryCommentService: SecondaryCommentS
 
     @GetMapping("")
     fun getSecondaryComments(): List<SecondaryComment>? {
+        LOGGER.info("Get Players ")
+        return secondaryCommentService.findAllByStatus( Status.ENABLED.toString() )
+    }
+
+    @GetMapping("/admin")
+    fun getSecondaryCommentsForAdmin(): List<SecondaryComment>? {
         LOGGER.info("Get Players ")
         return secondaryCommentService.findAll()
     }

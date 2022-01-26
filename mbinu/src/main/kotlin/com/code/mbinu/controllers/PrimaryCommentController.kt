@@ -1,6 +1,7 @@
 package com.code.mbinu.controllers
 
 import com.code.mbinu.models.PrimaryComment
+import com.code.mbinu.models.Status
 import com.code.mbinu.services.PrimaryCommentService
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.Logger
@@ -15,6 +16,12 @@ class PrimaryCommentController( val primaryCommentService: PrimaryCommentService
 
     @GetMapping("")
     fun getPrimaryComments(): List<PrimaryComment>? {
+        LOGGER.info("Get Players ")
+        return primaryCommentService.findAllByStatus( Status.ENABLED.toString() )
+    }
+
+    @GetMapping("/admin")
+    fun getPrimaryCommentsForAdmin(): List<PrimaryComment>? {
         LOGGER.info("Get Players ")
         return primaryCommentService.findAll()
     }

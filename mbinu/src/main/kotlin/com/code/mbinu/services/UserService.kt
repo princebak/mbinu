@@ -7,5 +7,6 @@ interface UserService {
     fun update( user: User ): User?
     fun findById( userId: String ): User?
     fun findAll(): List<User>?
+    fun findAllByStatus( status: String ): List<User>?
     fun delete( userId: String ): Boolean?
 }

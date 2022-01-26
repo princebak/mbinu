@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 @Service
 class PrimaryComponentManager( val primaryCommentRepository: PrimaryCommentRepository): PrimaryCommentService {
     override fun create( primaryComment: PrimaryComment ): PrimaryComment? {
+        primaryComment.status = Status.ENABLED
         primaryComment.metadata.created =  LocalDateTime.now()
         return primaryCommentRepository.save( primaryComment )
     }
@@ -25,6 +26,10 @@ class PrimaryComponentManager( val primaryCommentRepository: PrimaryCommentRepos
 
     override fun findAll(): List<PrimaryComment>? {
         return primaryCommentRepository.findAll()
+    }
+
+    override fun findAllByStatus(status: String): List<PrimaryComment>? {
+        return primaryCommentRepository.findAllByStatus( status )
     }
 
     override fun delete(primaryCommentId: String): Boolean? {

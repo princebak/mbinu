@@ -7,5 +7,6 @@ interface SecondaryCommentService {
     fun update( secondaryComment: SecondaryComment ): SecondaryComment?
     fun findById( secondaryCommentId: String ): SecondaryComment?
     fun findAll(): List<SecondaryComment>?
+    fun findAllByStatus( status: String ): List<SecondaryComment>?
     fun delete( secondaryCommentId: String ): Boolean?
 }

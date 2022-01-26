@@ -14,9 +14,15 @@ class ArticleController( val articleService: ArticleService) {
     private val LOGGER: Logger = LoggerFactory.getLogger( ArticleController::class.java )
 
     @GetMapping("")
-    fun getArticles(): List<Article>? {
-        LOGGER.info("Get Players ")
-        return articleService.findAll()
+    fun getArticles( @RequestParam("tags") tags: ArrayList<String>? ): List<Article>? {
+        LOGGER.info("Get Articles ")
+        return articleService.findAllForClient( tags )
+    }
+
+    @GetMapping("/admin")
+    fun getArticlesForAdmin( @RequestParam("tags") tags: ArrayList<String>? ): List<Article>? {
+        LOGGER.info("Get Articles ")
+        return articleService.findAllForAdmin( tags )
     }
 
     @GetMapping("/article")

@@ -7,5 +7,6 @@ interface PrimaryCommentService {
     fun update( primaryComment: PrimaryComment ): PrimaryComment?
     fun findById( primaryCommentId: String ): PrimaryComment?
     fun findAll(): List<PrimaryComment>?
+    fun findAllByStatus( status: String ): List<PrimaryComment>?
     fun delete( primaryCommentId: String ): Boolean?
 }

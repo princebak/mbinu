@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 @Service
 class UserManager(val userRepository: UserRepository):UserService {
     override fun create( user: User ): User? {
+        user.status = Status.ENABLED
         user.metadata.created = LocalDateTime.now()
         return userRepository.save( user )
     }
@@ -20,11 +21,17 @@ class UserManager(val userRepository: UserRepository):UserService {
     }
 
     override fun findById(userId: String): User? {
-        return userRepository.findById( userId ).orElse( null )
+        var user = userRepository.findById( userId ).orElse( null )
+        user.metadata.views += 1
+        return user
     }
 
     override fun findAll(): List<User>? {
         return userRepository.findAll()
+    }
+
+    override fun findAllByStatus(status: String): List<User>? {
+        return userRepository.findAllByStatus( status )
     }
 
     override fun delete( userId: String ): Boolean? {

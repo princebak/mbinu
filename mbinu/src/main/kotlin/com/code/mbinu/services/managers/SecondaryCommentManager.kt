@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 @Service
 class SecondaryCommentManager( val secondaryCommentRepository: SecondaryCommentRepository): SecondaryCommentService {
     override fun create( secondaryComment: SecondaryComment ): SecondaryComment? {
+        secondaryComment.status = Status.ENABLED
         secondaryComment.metadata.created = LocalDateTime.now()
         return secondaryCommentRepository.save( secondaryComment )
     }
@@ -26,6 +27,10 @@ class SecondaryCommentManager( val secondaryCommentRepository: SecondaryCommentR
 
     override fun findAll(): List<SecondaryComment>? {
         return secondaryCommentRepository.findAll()
+    }
+
+    override fun findAllByStatus(status: String): List<SecondaryComment>? {
+        return secondaryCommentRepository.findAllByStatus( status )
     }
 
     override fun delete( secondaryCommentId: String ): Boolean? {

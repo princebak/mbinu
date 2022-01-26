@@ -1,0 +1,8 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: mbinu
+  data:
+    mongodb:
+      uri: mongodb+srv://princebak:Prince2022@cluster0.tkw20.mongodb.net/mbinu_db?retryWrites=true&w=majority

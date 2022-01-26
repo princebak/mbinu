@@ -1,5 +1,6 @@
 package com.code.mbinu.controllers
 
+import com.code.mbinu.models.Status
 import com.code.mbinu.models.User
 import com.code.mbinu.services.UserService
 import lombok.extern.slf4j.Slf4j
@@ -15,6 +16,12 @@ class UserController( val userService: UserService) {
 
     @GetMapping("")
     fun getUsers(): List<User>? {
+        LOGGER.info("Get Players ")
+        return userService.findAllByStatus( Status.ENABLED.toString() )
+    }
+
+    @GetMapping("/admin")
+    fun getUsersForAdmin(): List<User>? {
         LOGGER.info("Get Players ")
         return userService.findAll()
     }
