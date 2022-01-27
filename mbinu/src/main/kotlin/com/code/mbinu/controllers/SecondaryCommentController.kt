@@ -43,7 +43,7 @@ class SecondaryCommentController( val secondaryCommentService: SecondaryCommentS
     @ResponseBody
     fun update(@RequestBody secondaryComment: SecondaryComment): SecondaryComment? {
         LOGGER.info("SecondaryComment create request: $secondaryComment")
-        return secondaryCommentService.create( secondaryComment )
+        return secondaryCommentService.update( secondaryComment )
     }
 
     @PostMapping("/delete")

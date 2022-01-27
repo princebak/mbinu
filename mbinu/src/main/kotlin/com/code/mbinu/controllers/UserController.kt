@@ -43,7 +43,7 @@ class UserController( val userService: UserService) {
     @ResponseBody
     fun update(@RequestBody user: User): User? {
         LOGGER.info("User create request: $user")
-        return userService.create( user )
+        return userService.update( user )
     }
 
     @PostMapping("/delete")

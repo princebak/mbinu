@@ -43,7 +43,7 @@ class PrimaryCommentController( val primaryCommentService: PrimaryCommentService
     @ResponseBody
     fun update(@RequestBody primaryComment: PrimaryComment): PrimaryComment? {
         LOGGER.info("PrimaryComment create request: $primaryComment")
-        return primaryCommentService.create( primaryComment )
+        return primaryCommentService.update( primaryComment )
     }
 
     @PostMapping("/delete")

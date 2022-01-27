@@ -2,9 +2,9 @@ package com.code.mbinu.services.managers
 
 import com.code.mbinu.models.Article
 import com.code.mbinu.models.Status
-import com.code.mbinu.models.User
 import com.code.mbinu.repositories.ArticleRepository
 import com.code.mbinu.services.ArticleService
+import com.code.mbinu.util.ArticleUtil
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -27,18 +27,20 @@ class ArticleManager( val articleRepository: ArticleRepository ): ArticleService
         return article
     }
 
-    override fun findAllForAdmin( tags: ArrayList<String>? ): List<Article>? {
+    override fun findAllForAdmin( tags: String? ): List<Article>? {
         if( tags == null ){
             return articleRepository.findAll()
         }
-        return articleRepository.findAllByTags( tags )
+        return articleRepository.findAll().filter { ArticleUtil.containsAnyTag( it, tags ) }
+        //return articleRepository.findAllByTags( tags )
     }
 
-    override fun findAllForClient(tags: ArrayList<String>? ): List<Article>? {
+    override fun findAllForClient(tags: String? ): List<Article>? {
         if( tags == null ){
             return articleRepository.findAllByStatus( Status.ENABLED.toString() )
         }
-        return articleRepository.findAllByStatusAndTags( Status.ENABLED.toString(), tags )
+        return articleRepository.findAllByStatus( Status.ENABLED.toString() ).filter { ArticleUtil.containsAnyTag( it, tags ) }
+        //return articleRepository.findAllByStatusAndTags( Status.ENABLED.toString(), tags )
     }
 
     override fun delete( articleId: String ): Boolean? {

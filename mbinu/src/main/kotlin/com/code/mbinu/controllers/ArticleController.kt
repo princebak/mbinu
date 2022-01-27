@@ -14,13 +14,13 @@ class ArticleController( val articleService: ArticleService) {
     private val LOGGER: Logger = LoggerFactory.getLogger( ArticleController::class.java )
 
     @GetMapping("")
-    fun getArticles( @RequestParam("tags") tags: ArrayList<String>? ): List<Article>? {
+    fun getArticles( @RequestParam("tags") tags: String? ): List<Article>? {
         LOGGER.info("Get Articles ")
         return articleService.findAllForClient( tags )
     }
 
     @GetMapping("/admin")
-    fun getArticlesForAdmin( @RequestParam("tags") tags: ArrayList<String>? ): List<Article>? {
+    fun getArticlesForAdmin( @RequestParam("tags") tags: String? ): List<Article>? {
         LOGGER.info("Get Articles ")
         return articleService.findAllForAdmin( tags )
     }
@@ -42,7 +42,7 @@ class ArticleController( val articleService: ArticleService) {
     @ResponseBody
     fun update(@RequestBody article: Article): Article? {
         LOGGER.info("Article create request: $article")
-        return articleService.create( article )
+        return articleService.update( article )
     }
 
     @PostMapping("/delete")
