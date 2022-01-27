@@ -12,44 +12,44 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/mbinu/api/v1/users")
 class UserController( val userService: UserService) {
-    private val LOGGER: Logger = LoggerFactory.getLogger( UserController::class.java )
+    private val logger: Logger = LoggerFactory.getLogger( UserController::class.java )
 
     @GetMapping("")
     fun getUsers(): List<User>? {
-        LOGGER.info("Get Players ")
+        logger.info("Get Players for Client ")
         return userService.findAllByStatus( Status.ENABLED.toString() )
     }
 
     @GetMapping("/admin")
     fun getUsersForAdmin(): List<User>? {
-        LOGGER.info("Get Players ")
+        logger.info("Get Players for Admin ")
         return userService.findAll()
     }
 
     @GetMapping("/user")
     fun getUserById(@RequestHeader("userId") userId: String): User? {
-        LOGGER.info("Get User By Id : $userId")
+        logger.info("Get User By Id : $userId")
         return userService.findById( userId )
     }
 
     @PostMapping("")
     @ResponseBody
     fun create(@RequestBody user: User): User? {
-        LOGGER.info("User create request: $user")
+        logger.info("User create request: $user")
         return userService.create( user )
     }
 
     @PostMapping("/update")
     @ResponseBody
     fun update(@RequestBody user: User): User? {
-        LOGGER.info("User create request: $user")
+        logger.info("User update request: $user")
         return userService.update( user )
     }
 
     @PostMapping("/delete")
     @ResponseBody
     fun delete( @RequestHeader("userId") userId: String ): Boolean? {
-        LOGGER.info("User delete request id: $userId")
+        logger.info("User delete request id: $userId")
         return userService.delete( userId )
     }
 }

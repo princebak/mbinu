@@ -11,44 +11,44 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/mbinu/api/v1/articles")
 class ArticleController( val articleService: ArticleService) {
-    private val LOGGER: Logger = LoggerFactory.getLogger( ArticleController::class.java )
+    private val logger: Logger = LoggerFactory.getLogger( ArticleController::class.java )
 
     @GetMapping("")
     fun getArticles( @RequestParam("tags") tags: String? ): List<Article>? {
-        LOGGER.info("Get Articles ")
+        logger.info("Get Articles for client")
         return articleService.findAllForClient( tags )
     }
 
     @GetMapping("/admin")
     fun getArticlesForAdmin( @RequestParam("tags") tags: String? ): List<Article>? {
-        LOGGER.info("Get Articles ")
+        logger.info("Get Articles for Admin ")
         return articleService.findAllForAdmin( tags )
     }
 
     @GetMapping("/article")
     fun getArticleById(@RequestHeader("articleId") articleId: String): Article? {
-        LOGGER.info("Get Article By Id : $articleId")
+        logger.info("Get Article By Id : $articleId")
         return articleService.findById( articleId )
     }
 
     @PostMapping("")
     @ResponseBody
     fun create(@RequestBody article: Article): Article? {
-        LOGGER.info("Article create request: $article")
+        logger.info("Article create request: $article")
         return articleService.create( article )
     }
 
     @PostMapping("/update")
     @ResponseBody
     fun update(@RequestBody article: Article): Article? {
-        LOGGER.info("Article create request: $article")
+        logger.info("Article update request: $article")
         return articleService.update( article )
     }
 
     @PostMapping("/delete")
     @ResponseBody
     fun delete( @RequestHeader("articleId") articleId: String ): Boolean? {
-        LOGGER.info("Article delete request id: $articleId")
+        logger.info("Article delete request id: $articleId")
         return articleService.delete( articleId )
     }
 }

@@ -6,6 +6,8 @@
         <set>
           <option value="articleId" />
           <option value="primaryCommentId" />
+          <option value="secondaryCommentId" />
+          <option value="userId" />
         </set>
       </option>
     </inspection_tool>

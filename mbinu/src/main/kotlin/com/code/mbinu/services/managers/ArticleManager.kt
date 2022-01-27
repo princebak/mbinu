@@ -32,7 +32,6 @@ class ArticleManager( val articleRepository: ArticleRepository ): ArticleService
             return articleRepository.findAll()
         }
         return articleRepository.findAll().filter { ArticleUtil.containsAnyTag( it, tags ) }
-        //return articleRepository.findAllByTags( tags )
     }
 
     override fun findAllForClient(tags: String? ): List<Article>? {
@@ -40,7 +39,6 @@ class ArticleManager( val articleRepository: ArticleRepository ): ArticleService
             return articleRepository.findAllByStatus( Status.ENABLED.toString() )
         }
         return articleRepository.findAllByStatus( Status.ENABLED.toString() ).filter { ArticleUtil.containsAnyTag( it, tags ) }
-        //return articleRepository.findAllByStatusAndTags( Status.ENABLED.toString(), tags )
     }
 
     override fun delete( articleId: String ): Boolean? {
